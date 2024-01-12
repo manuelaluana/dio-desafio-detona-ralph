@@ -46,3 +46,5 @@ Como feature adicional e diferencial do projeto, tomei a liberdade de adicionar 
 decrecimo de vidas do player caso o jogador erre a janela do Ralph! Quando o contador de vidas
 chegar em _0_, o player será notificado de que não tem mais vidas e seu score. A cada janela clicada de forma
 incorreta seu score também é afetado, perdendo **1 ponto** por cada erro!
+
+[Projeto original DIO](https://github.com/digitalinnovationone/jsgame-detona-ralph)
