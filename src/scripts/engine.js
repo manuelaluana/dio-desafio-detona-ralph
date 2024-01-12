@@ -4,11 +4,13 @@ const state = {
     enemy: document.querySelector(".enemy"),
     timeLeft: document.querySelector("#time-left"),
     score: document.querySelector("#score"),
+    lives: document.querySelector("#lives"),
   },
   values: {
     gameVelocity: 1000,
     hitPosition: 0,
     result: 0,
+    lifeCount: 3,
     currentTime: 60,
   },
   actions: {
@@ -17,13 +19,17 @@ const state = {
   },
 };
 
+function clearStats() {
+  clearInterval(state.actions.countDownTimerId);
+  clearInterval(state.actions.timerId);
+}
+
 function countDown() {
   state.values.currentTime--;
   state.view.timeLeft.textContent = state.values.currentTime;
 
   if (state.values.currentTime <= 0) {
-    clearInterval(state.actions.countDownTimerId);
-    clearInterval(state.actions.timerId);
+    clearStats();
     alert("Game Over! O seu resultado foi: " + state.values.result);
   }
 }
@@ -53,6 +59,18 @@ function addListenerHitBox() {
         state.view.score.textContent = state.values.result;
         state.values.hitPosition = null;
         playSound("hit");
+      } else {
+        state.values.result--;
+        state.view.score.textContent = state.values.result;
+        state.values.hitPosition = null;
+        state.values.lifeCount--;
+        state.view.lives.textContent = "x" + state.values.lifeCount;
+        if (state.values.lifeCount <= 0) {
+          clearStats();
+          alert(
+            "Game Over! Você não tem mais VIDAS! Score: " + state.values.result
+          );
+        }
       }
     });
   });
